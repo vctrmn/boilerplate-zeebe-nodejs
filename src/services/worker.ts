@@ -1,14 +1,16 @@
 import { ZBClient, ZBWorkerTaskHandler } from 'zeebe-node';
 import logger from '../plugins/logger';
+import addOrSubtractTwoNumber from './action';
 
-const { ZEEBE_GATEWAY = 'localhost:26500', TASK_NAME = 'task-default' } = process.env;
+const { ZEEBE_GATEWAY = 'localhost:26500', TASK_NAME = 'task-add-or-subtract' } = process.env;
 
 const zbc = new ZBClient(ZEEBE_GATEWAY);
 
 const handleTask: ZBWorkerTaskHandler = async (job) => {
     try {
         logger.info(`Processing task ${TASK_NAME}`);
-        return job.complete();
+        const result = addOrSubtractTwoNumber(job?.variables);
+        return job.complete({ res: result });
     } catch (error) {
         logger.error(error);
         return job.fail(`Error on processing task ${TASK_NAME}`);
