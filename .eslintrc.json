@@ -1,0 +1,35 @@
+{
+    "env": {
+        "node": true,
+        "es2020": true
+    },
+    "parser": "@typescript-eslint/parser", // Specifies the ESLint parser
+    "parserOptions": {
+        "sourceType": "module", // Allows for the parsing of modern ECMAScript features
+        "ecmaVersion": 2021 // Allows for the use of imports
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "promise" // Allows for the use of imports
+    ],
+    "extends": [
+        "eslint:recommended",
+        "airbnb-base",
+        "plugin:import/typescript",
+        "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+        "plugin:promise/recommended", // Enforce best practices for JavaScript promises
+        "plugin:prettier/recommended" // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+    ],
+    "rules": {
+        // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
+        // e.g. "@typescript-eslint/explicit-function-return-type": "off",
+        "import/extensions": [
+            "error",
+            {
+                "ts": "never"
+            }
+        ],
+        "max-len": "off" // disables line length check
+    },
+    "settings": {}
+}
